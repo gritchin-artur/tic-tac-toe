@@ -1,3 +1,5 @@
+import { userNameHandler } from '../handlers/userNameHandler.js';
+
 export const userName = (i, dom, data) => {
     const overlay = document.createElement('div');
     overlay.classList.add('modal-overlay');
@@ -17,23 +19,7 @@ export const userName = (i, dom, data) => {
     submitBtn.innerText = 'Submit';
     submitBtn.classList.add('modal-button');
 
-    submitBtn.addEventListener('click', () => {
-        const name = input.value.trim();
-        if (name) {
-            if (i === 1) {
-                data.playerX = name;
-                dom.playerX.innerText = `Player X: ${name}`;
-                document.body.removeChild(overlay);
-            }
-            if (i === 2) {
-                data.playerO = name;
-                dom.playerO.innerText = `Player O: ${name}`;
-                document.body.removeChild(overlay);
-            }
-        } else {
-            alert('Please enter a name');
-        }
-    });
+    userNameHandler(submitBtn, input, i, data, dom, overlay);
 
     modalBox.append(promptText, input, submitBtn);
     overlay.appendChild(modalBox);
